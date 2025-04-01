@@ -383,7 +383,7 @@ this.health-=amount;triggerScreenShake(6,12);if(this.health<=0){this.health=0;ga
                 
                 ctx.restore();
                 
-                if(this.maxHealth>1&&this.type==='normal'){
+                if(this.maxHealth>1 && (this.type==='normal' || this.type==='shooter')) {
                     const hBW=this.size;
                     const hBH=4;
                     const hBX=this.x-hBW/2;
@@ -481,7 +481,7 @@ this.health-=amount;triggerScreenShake(6,12);if(this.health<=0){this.health=0;ga
             enemies.push(new Enemy(x,y,s,c,bS,bH,t));
         } 
         
-        function showUpgradeMessage(m){upgradeMessageElement.textContent=m;clearTimeout(upgradeMessageTimeout);upgradeMessageElement.style.opacity=1;upgradeMessageTimeout=setTimeout(()=>{upgradeMessageElement.style.opacity=0;},2000);} function updateUpgradeUI(){if(!player)return;upgradePointsElement.textContent=`Creds: ${player.upgradePoints}`;if(currentUpgradeLevel<scoreThresholds.length){const nT=scoreThresholds[currentUpgradeLevel];const pN=Math.max(0,nT-score);nextUpgradeProgressElement.textContent=`Next: ${pN}pts`;}else{nextUpgradeProgressElement.textContent="Next: MAX";}firerateLabel.textContent=`Cool: ${player.fireCooldown}`;damageLabel.textContent=`Dmg: ${player.bulletDamage.toFixed(1)}`;spreadLabel.textContent=`Proj: ${player.bulletSpreadLevel+1}`;dashLabel.textContent=`Cool: ${(player.dashCooldown/60).toFixed(1)}s`;} function triggerScreenShake(i,d){screenShakeIntensity=i;screenShakeDuration=d;}
+        function showUpgradeMessage(m){upgradeMessageElement.textContent=m;clearTimeout(upgradeMessageTimeout);upgradeMessageElement.style.opacity=1;upgradeMessageTimeout=setTimeout(()=>{upgradeMessageElement.style.opacity=0;},2000);} function updateUpgradeUI(){if(!player)return;upgradePointsElement.textContent=`Creds: ${player.upgradePoints}`;if(currentUpgradeLevel<scoreThresholds.length){const nT=scoreThresholds[currentUpgradeLevel];const pN=Math.max(0,nT-score);nextUpgradeProgressElement.textContent=`Next: ${score}/${nT}pts`;}else{nextUpgradeProgressElement.textContent="Next: MAX";}firerateLabel.textContent=`Cool: ${player.fireCooldown}`;damageLabel.textContent=`Dmg: ${player.bulletDamage.toFixed(1)}`;spreadLabel.textContent=`Proj: ${player.bulletSpreadLevel+1}`;dashLabel.textContent=`Cool: ${(player.dashCooldown/60).toFixed(1)}s`;} function triggerScreenShake(i,d){screenShakeIntensity=i;screenShakeDuration=d;}
         
         // 난이도 선택 이벤트 핸들러
         function handleDifficultyChoice(difficulty) {
